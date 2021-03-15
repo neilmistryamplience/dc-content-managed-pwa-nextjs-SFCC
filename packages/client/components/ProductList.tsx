@@ -83,8 +83,7 @@ const ProductList: React.SFC<Props> = (props) => {
             <ul className={classes.list}>
                 {
                     results.map((item: any, index: number) => {
-                        return 
-                        <li className={classes.listItem}>
+                        return <li className={classes.listItem}>
                             <img className={classes.listItemImage} src={item.image_groups[0].images[0].link} />
                             <Typography variant="h5">
                                     {item.name}
