@@ -4,8 +4,12 @@ import { NextPage } from 'next';
 import EditorialBlock from '../components/EditorialBlock';
 import HeroBannerBlock from '../components/HeroBannerBlock';
 import GalleryBlock from '../components/GalleryBlock';
+import ProductList from '../components/ProductList';
+import SimpleImageBanner from '../components/SimpleImageBanner';
+import CardList from '../components/CardList';
 import Navigation from '../components/Navigation';
 import { fetchContentById } from '../utils/fetchContent';
+import GenericCMSComponent from '../components/GenericCMSComponent';
 
 interface Props {
     component: any
@@ -18,24 +22,27 @@ const Visualization: NextPage<Props> = (props: Props) => {
 
     let ComponentType = null;
 
-    switch (component.component) {
-        case 'HeroBannerBlock':
-            ComponentType = HeroBannerBlock;
+    console.log(component._meta.schema)
+    switch (component._meta.schema) {
+        case 'https://amplience.com/composablecommerce/sfcc-curated-products.json':
+            ComponentType = ProductList;
             break;
-        case 'EditorialBlock':
-            ComponentType = EditorialBlock;
+        case 'https://amplience.com/composablecommerce/simple-image-banner.json':
+            ComponentType = SimpleImageBanner;
             break;
-        case 'GalleryBlock':
-            ComponentType = GalleryBlock;
+        case 'https://amplience.com/composablecommerce/card-list.json':
+            ComponentType = CardList;
             break;
-        case 'Navigation':
-            ComponentType = Navigation;
-            break;
+        default:
+            ComponentType = GenericCMSComponent
     }
+
 
     return (
         <ComponentType {...component} />
     );
+
+    return null;
 }
 
 Visualization.getInitialProps = async (context) => {
