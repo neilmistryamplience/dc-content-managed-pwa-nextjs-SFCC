@@ -56,7 +56,7 @@ const Card: React.SFC<Props> = (props) => {
                 {
                             button ? (
                                 <a href={button.buttonLink}>
-                                    <Button variant='contained' color='primary'>{button.buttonLabel}</Button>
+                                    <Button variant='contained' color='primary' style={{margin:'auto', display:'block'}}>{button.buttonLabel}</Button>
                                 </a>
                             ) : null
                         }
