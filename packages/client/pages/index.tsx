@@ -9,6 +9,7 @@ import Navigation from "../components/Navigation";
 import SearchBox from "../components/SearchBox";
 import Footer from "../components/Footer";
 import TemplateChooser from "../components/TemplateChooser";
+import SlotChooser from "../components/SlotChooser";
 import Sidebar from "../components/Sidebar";
 import { fetchContent } from "../utils/fetchContent";
 import {
@@ -17,10 +18,11 @@ import {
   fetchProductsBySearch,
 } from "../utils/fetchSFCCProducts";
 
+
 interface Props {
   navigation: {
     navigation: {
-      links: {
+      menu: {
         type: string;
         data: {
           label: string;
@@ -29,7 +31,16 @@ interface Props {
       }[];
     };
   };
-  slot: {
+  slothero: {
+    _meta:any;
+    content: any[];
+  };
+  slotbody: {
+    _meta:any;
+    content: any[];
+  };
+  slotproducts: {
+    _meta:any;
     content: any[];
   };
   products: any[];
@@ -38,13 +49,11 @@ interface Props {
 }
 
 const Index: NextPage<Props> = (props: Props) => {
-  let { navigation, slot, products, productslist, productSearch } = props;
+  let { navigation, slothero, slotbody, slotproducts, products, productslist, productSearch } = props;
 
-  //console.log("Products! - ", products);
-
+  //console.log("Navigation! - ", navigation);
   //console.log("Products List! - ", productslist)
-
-  console.log("Products Search! - ", productSearch);
+  //console.log("Products Search! - ", productSearch);
 
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
 
@@ -53,7 +62,7 @@ const Index: NextPage<Props> = (props: Props) => {
   };
 
   /** Data fixes if not loaded **/
-  let defaultNavContent = navigation?.navigation?.links || [
+  let defaultNavContent = navigation?.navigation?.menu || [
     {
       type: "root-menu",
       data: {
@@ -75,10 +84,12 @@ const Index: NextPage<Props> = (props: Props) => {
       },
     ],
   };
-  if (slot && slot.content) {
-    defaultSlotContent = slot;
+  if (slothero && slothero.content) {
+    defaultSlotContent = slothero;
   }
-  const slotContent = defaultSlotContent;
+  const slotContent:any = defaultSlotContent;
+
+  //console.log("What is the Slot", slotContent)
 
   return (
     <>
@@ -96,9 +107,9 @@ const Index: NextPage<Props> = (props: Props) => {
           onToggleSidebar={handleToggleSidebar}
         ></Header>
 
-        {slotContent.content.map((component: any) => {
-          return <TemplateChooser {...component} />;
-        })}
+        <SlotChooser {...slotContent} />
+        <SlotChooser {...slotbody} />
+        <SlotChooser {...slotproducts} />  
 
         <Footer />
       </div>
@@ -112,9 +123,17 @@ const Index: NextPage<Props> = (props: Props) => {
   );
 };
 
+/*
+ - hero: home/main/hero-localised
+ - body: home/main/body-localised
+ - products: home/main/products-localised
+ - Navigation: dior/web/menu
+*/
 Index.getInitialProps = async (context) => {
-  const navigation = fetchContent("slots/navigation", context);
-  const slot = fetchContent("slots/homepage-hero", context);
+  const navigation = fetchContent("dior/web/menu", context);
+  const slothero = fetchContent("home/main/hero-localised", context);
+  const slotbody = fetchContent("home/main/body-localised", context);
+  const slotproducts = fetchContent("home/main/products-localised", context);
 
   const products = fetchProductById("25519044M", context);
   const prods: Array<any> = [
@@ -135,7 +154,9 @@ Index.getInitialProps = async (context) => {
 
   return {
     navigation: await navigation,
-    slot: await slot,
+    slothero: await slothero,
+    slotbody: await slotbody,
+    slotproducts: await slotproducts,
     products: await products,
     productslist: await productslist,
     productSearch: await productSearch,
