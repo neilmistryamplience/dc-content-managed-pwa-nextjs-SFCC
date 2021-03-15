@@ -48,8 +48,7 @@ const GenericCMSComponent: React.SFC<Props> = (props) => {
 
   console.log("Meta,", other )
 
-  return null;
-  /*return (
+  return (
     <Section
       title={context._meta.name}
       variant={SectionVariant.CONTAINED}
@@ -60,11 +59,11 @@ const GenericCMSComponent: React.SFC<Props> = (props) => {
           No Rendering Template Found for this content
         </Typography>
         <div style={{ backgroundColor: "black", color: "white" }}>
-          <pre style={styles.pre}>{JSON.stringify(other, null, 2)}</pre>
+          <pre>{JSON.stringify(other, null, 2)}</pre>
         </div>
       </Paper>
     </Section>
-  );*/
+  );
 };
 
 export default withStyles(styles)(GenericCMSComponent);
