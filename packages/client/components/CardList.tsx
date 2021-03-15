@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { withStyles, WithStyles, Theme, Typography } from '@material-ui/core';
 import Section, { SectionVariant } from './Section';
 import CallToAction from './CallToAction';
-import SimpleImageBanner from './SimpleImageBanner';
+import TemplateChooser from './TemplateChooser';
 
 const styles = (theme: Theme) => ({
     root: {
@@ -69,8 +69,9 @@ const CardList: React.SFC<Props> = (props) => {
                 {
 
                     cards.map((card: any, index: number) => {
+                        const ammended = {component: {...card}}
                         return <li className={classes.listItem}>
-                            <SimpleImageBanner {...card} />
+                            <TemplateChooser {...ammended} />
                             </li>
                     })
                 }
