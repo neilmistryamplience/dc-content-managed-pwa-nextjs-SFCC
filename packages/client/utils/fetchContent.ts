@@ -10,6 +10,7 @@ export function fetchContent<T = any>(key: string, context?: NextPageContext): P
 }
 
 export function fetchContentById<T = any>(id: string, context?: NextPageContext): Promise<T> {
+    console.log("content ID: ", id)
     return fetch(`https://${context.query.contentApi  || process.env.contentApi}/content/id/${id}?depth=all&format=inlined`)
             .then(resp => resp.json())
             .then(body => body.content);

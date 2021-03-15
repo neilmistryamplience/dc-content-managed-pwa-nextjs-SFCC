@@ -22,7 +22,7 @@ const Visualization: NextPage<Props> = (props: Props) => {
 
     let ComponentType = null;
 
-    console.log(component._meta.schema)
+    console.log("SCHEMA: = ", component._meta.schema)
     switch (component._meta.schema) {
         case 'https://amplience.com/composablecommerce/sfcc-curated-products.json':
             ComponentType = ProductList;
@@ -34,6 +34,7 @@ const Visualization: NextPage<Props> = (props: Props) => {
             ComponentType = CardList;
             break;
         default:
+            console.log("I'm in here!!!????")
             ComponentType = GenericCMSComponent
     }
 

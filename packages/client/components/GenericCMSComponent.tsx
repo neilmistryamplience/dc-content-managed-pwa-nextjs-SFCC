@@ -18,15 +18,23 @@ const styles = (theme: Theme) => ({
     background: theme.palette.grey.A400,
     borderBottom: `1px solid ${theme.palette.grey[700]}`,
     color: theme.palette.getContrastText(theme.palette.grey.A400),
-  },
-  pre: {
-    display: "block",
-    padding: "10px 30px",
-    margin: "0",
-    overflow: "scroll",
-    background: "#000",
-  },
+    pre: {
+      display: "block",
+      padding: "10px 30px",
+      margin: "0",
+      overflow: "scroll",
+      background: "#000",
+    }
+  }
 });
+
+export type GenericComponentMeta = {
+  _meta:{
+    name:string;
+    schema:string;
+    deliveryId:string;
+  }
+};
 
 interface Props extends PropsWithChildren<WithStyles<typeof styles>> {
   className?: string;
@@ -36,9 +44,14 @@ interface Props extends PropsWithChildren<WithStyles<typeof styles>> {
 const GenericCMSComponent: React.SFC<Props> = (props) => {
   const { classes, className, ...other } = props;
 
-  return (
+  const context:any = other;
+
+  console.log("Meta,", other )
+
+  return null;
+  /*return (
     <Section
-      title={other._meta.name}
+      title={context._meta.name}
       variant={SectionVariant.CONTAINED}
       {...other}
     >
@@ -51,7 +64,7 @@ const GenericCMSComponent: React.SFC<Props> = (props) => {
         </div>
       </Paper>
     </Section>
-  );
+  );*/
 };
 
 export default withStyles(styles)(GenericCMSComponent);

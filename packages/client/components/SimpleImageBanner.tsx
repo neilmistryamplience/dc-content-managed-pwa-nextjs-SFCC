@@ -1,7 +1,6 @@
 import React from 'react';
 import { withStyles, WithStyles, Typography, Theme, Button } from '@material-ui/core';
 import clsx from 'clsx';
-import Overlay from './Overlay';
 
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { getImageURL, ImageScaleMode } from '../utils/getImageURL';
@@ -46,14 +45,12 @@ const SimpleImageBanner: React.SFC<Props> = (props) => {
         width: 3000,
         upscale: false
     });
-    console.log(bannerImage)
-    console.log(imageUrl)
 
     const buttonDStyle = {
-        left: "36%",
-        top: "90%",
+        left: '36%',
+        top: '90%',
         position: 'absolute'
-      };
+      } as React.CSSProperties;
 
     return (
         <div className={clsx(classes.root, className)} {...other} style={{position:'relative'}}>
@@ -61,7 +58,7 @@ const SimpleImageBanner: React.SFC<Props> = (props) => {
                 {
                             positionalLink ? (
                                 <a href={positionalLink.button.buttonLink} style={buttonDStyle}>
-                                    <Button variant="containedPrimary">{positionalLink.button.buttonLabel}</Button>
+                                    <Button variant='contained' color='primary'>{positionalLink.button.buttonLabel}</Button>
                                 </a>
                             ) : null
                         }
