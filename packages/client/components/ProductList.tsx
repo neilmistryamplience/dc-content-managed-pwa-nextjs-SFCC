@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { withStyles, WithStyles, Theme, Typography } from '@material-ui/core';
+import { withStyles, WithStyles, Theme, Typography,Button } from '@material-ui/core';
 import Section, { SectionVariant } from './Section';
 import CallToAction from './CallToAction';
 import { fetchProductsByIds } from '../utils/fetchSFCCProducts';
@@ -96,10 +96,10 @@ const ProductList: React.SFC<Props> = (props) => {
                                                 £{item.price}
                                             </Typography>
                                     
-                                
-                                <CallToAction href={item.master.link}>
-                                    SHOP NOW
-                                </CallToAction>
+                                <a href={item.master.link}>
+                                    <Button variant='contained' color='primary'>SHOP NOW</Button>
+                                </a>
+
                         </li>
                     })
                 }
