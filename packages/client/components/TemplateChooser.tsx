@@ -11,6 +11,7 @@ import GenericCMSComponent from "../components/GenericCMSComponent";
 import ProductList from "../components/ProductList";
 import SimpleImageBanner from "../components/SimpleImageBanner";
 import CardList from "../components/CardList";
+import Page from "../components/Page";
 import Navigation from "../components/Navigation";
 
 interface Props {
@@ -33,6 +34,9 @@ const TemplateChooser: React.SFC<Props> = (props) => {
         break;
       case "https://amplience.com/composablecommerce/navigation.json":
         ComponentType = Navigation;
+        break;
+      case "https://amplience.com/composablecommerce/page.json":
+        ComponentType = Page;
         break;
       default:
         ComponentType = GenericCMSComponent;
