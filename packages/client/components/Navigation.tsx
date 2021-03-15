@@ -35,22 +35,24 @@ const styles = (theme: Theme) => ({
 });
 
 export type NavigationLink = {
-    title: string;
-    href: string;
+    type: string;
+    data:{
+        label:string;
+        link:string;
+    };
 };
 
 interface Props extends WithStyles<typeof styles> {
     className?: string;
     style?: React.CSSProperties;
-
-    links: NavigationLink[];
+    menu:NavigationLink[];
 }
 
 const Navigation: React.SFC<Props> = (props) => {
     const {
         classes,
         className,
-        links,
+        menu,
         ...other
     } = props;
 
@@ -60,13 +62,13 @@ const Navigation: React.SFC<Props> = (props) => {
         <nav className={clsx(classes.root, className)} {...other}>
             <ul className={classes.list}>
                 {
-                    links.map(link => {
+                    menu.map(link => {
                         return <li className={clsx(classes.listItem, {
-                            [classes.activeListItem]: router?.asPath === link.href
+                            [classes.activeListItem]: router?.asPath === link.data.link
                         })}>
-                            <Link href='/' as={link.href}>
+                            <Link href='/' as={link.data.link}>
                                 <a>
-                                    {link.title}
+                                    {link.data.label}
                                 </a>
                             </Link>
                         </li>;

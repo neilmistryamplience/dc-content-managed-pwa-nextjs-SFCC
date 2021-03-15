@@ -73,7 +73,7 @@ export interface Props extends WithStyles<typeof styles> {
     style?: React.CSSProperties;
     open: boolean;
     onToggleOpen: () => void;
-    links: NavigationLink[];
+    menu: NavigationLink[];
 }
 
 const Sidebar: React.SFC<Props> = (props) => {
@@ -81,7 +81,7 @@ const Sidebar: React.SFC<Props> = (props) => {
         classes,
         open,
         onToggleOpen,
-        links,
+        menu,
         ...other
     } = props;
 
@@ -123,10 +123,10 @@ const Sidebar: React.SFC<Props> = (props) => {
                         <Divider />
                         <List component="nav" aria-label="secondary mailbox folders">
                             {
-                                links.map(link => {
-                                    return <Link href={link.href}>
+                                 menu.map(link => {
+                                    return <Link href={link.data.link}>
                                         <ListItem button>
-                                            <ListItemText primary={link.title} />
+                                            <ListItemText primary={link.data.label} />
                                         </ListItem>
                                     </Link>;
                                 })

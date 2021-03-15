@@ -8,7 +8,7 @@ import UserActions from "../components/UserActions";
 import Navigation from "../components/Navigation";
 import SearchBox from "../components/SearchBox";
 import Footer from "../components/Footer";
-import TemplateChooser from '../components/TemplateChooser';
+import TemplateChooser from "../components/TemplateChooser";
 import Sidebar from "../components/Sidebar";
 import { fetchContent } from "../utils/fetchContent";
 import {
@@ -20,7 +20,13 @@ import {
 interface Props {
   navigation: {
     navigation: {
-      links: { title: string; href: string }[];
+      links: {
+        type: string;
+        data: {
+          label: string;
+          link: string;
+        };
+      }[];
     };
   };
   slot: {
@@ -49,9 +55,12 @@ const Index: NextPage<Props> = (props: Props) => {
   /** Data fixes if not loaded **/
   let defaultNavContent = navigation?.navigation?.links || [
     {
-      title:
-        'Error: No Navigation Slot with content for delivery key "slots/navigation"',
-      href: "/",
+      type: "root-menu",
+      data: {
+        label:
+          'Error: No Navigation Slot with content for delivery key "slots/navigation"',
+        link: "/",
+      },
     },
   ];
   const navigationLinks = defaultNavContent;
@@ -83,21 +92,19 @@ const Index: NextPage<Props> = (props: Props) => {
         <Header
           actions={<UserActions />}
           search={<SearchBox />}
-          navigation={<Navigation links={navigationLinks}></Navigation>}
+          navigation={<Navigation menu={navigationLinks}></Navigation>}
           onToggleSidebar={handleToggleSidebar}
         ></Header>
 
-        {slotContent.content.map((component:any) => {
-          return (
-            <TemplateChooser {...component}/>
-        );
+        {slotContent.content.map((component: any) => {
+          return <TemplateChooser {...component} />;
         })}
 
         <Footer />
       </div>
 
       <Sidebar
-        links={navigationLinks}
+        menu={navigationLinks}
         open={sidebarOpen}
         onToggleOpen={handleToggleSidebar}
       />
