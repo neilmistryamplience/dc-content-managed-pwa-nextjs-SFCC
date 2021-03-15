@@ -79,7 +79,7 @@ const ProductList: React.SFC<Props> = (props) => {
     }, []);
 
     return (
-        <Section title="SOME F*CKING SFCC PRODUCTS!!!" variant={SectionVariant.CONTAINED} {...other}>
+        <Section title="" variant={SectionVariant.CONTAINED} {...other}>
             <ul className={classes.list}>
                 {
                     results.map((item: any, index: number) => {
