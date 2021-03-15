@@ -14,6 +14,7 @@ import CardList from "../components/CardList";
 import Card from "../components/Card";
 import Page from "../components/Page";
 import Navigation from "../components/Navigation";
+import AdvancedBanner from "../components/AdvancedBanner";
 
 interface Props {
   component: any;
@@ -30,6 +31,9 @@ const TemplateChooser: React.SFC<Props> = (props) => {
       case "https://amplience.com/composablecommerce/simple-image-banner.json":
         ComponentType = SimpleImageBanner;
         break;
+    case "https://amplience.com/composablecommerce/advanced-banner.json":
+            ComponentType = AdvancedBanner;
+            break;
       case "https://amplience.com/composablecommerce/card-list.json":
         ComponentType = CardList;
         break;
