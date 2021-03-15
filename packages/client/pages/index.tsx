@@ -8,6 +8,10 @@ import UserActions from "../components/UserActions";
 import Navigation from "../components/Navigation";
 import SearchBox from "../components/SearchBox";
 import Footer from "../components/Footer";
+import ProductList from '../components/ProductList';
+import SimpleImageBanner from '../components/SimpleImageBanner';
+import CardList from '../components/CardList';
+import GenericCMSComponent from '../components/GenericCMSComponent';
 import EditorialBlock from "../components/EditorialBlock";
 import HeroBannerBlock from "../components/HeroBannerBlock";
 import GalleryBlock from "../components/GalleryBlock";
@@ -89,20 +93,23 @@ const Index: NextPage<Props> = (props: Props) => {
           onToggleSidebar={handleToggleSidebar}
         ></Header>
 
-        {slotContent.content.map((component) => {
+        {slotContent.content.map((component:any) => {
           let ComponentType = null;
 
           switch (component._meta.schema) {
-            case "https://amplience.com/composablecommerce/sfcc-curated-products.json":
-              ComponentType = ProductList;
-              break;
-            case "https://amplience.com/composablecommerce/simple-image-banner.json":
-              ComponentType = SimpleImageBanner;
-              break;
-            case "https://amplience.com/composablecommerce/card-list.json":
-              ComponentType = CardList;
-              break;
-          }
+            case 'https://amplience.com/composablecommerce/sfcc-curated-products.json':
+                ComponentType = ProductList;
+                break;
+            case 'https://amplience.com/composablecommerce/simple-image-banner.json':
+                ComponentType = SimpleImageBanner;
+                break;
+            case 'https://amplience.com/composablecommerce/card-list.json':
+                ComponentType = CardList;
+                break;
+            default:
+                console.log("I'm in here!!!????")
+                ComponentType = GenericCMSComponent
+        }
 
           return <ComponentType {...component} />;
         })}
