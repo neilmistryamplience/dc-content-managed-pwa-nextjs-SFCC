@@ -96,6 +96,9 @@ const Index: NextPage<Props> = (props: Props) => {
         {slotContent.content.map((component:any) => {
           let ComponentType = null;
 
+          if(!component) return null;
+          if(!component._meta) return null;
+
           switch (component._meta.schema) {
             case 'https://amplience.com/composablecommerce/sfcc-curated-products.json':
                 ComponentType = ProductList;
