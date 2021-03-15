@@ -50,12 +50,14 @@ export type ProductItem = {
 interface Props extends WithStyles<typeof styles> {
     className?: string;
     style?: React.CSSProperties;
+    header:string;
     productList?: any[];
 }
 
 const ProductList: React.SFC<Props> = (props) => {
     const {
         classes,
+        header,
         productList = [],
         ...other
     } = props;
@@ -79,7 +81,7 @@ const ProductList: React.SFC<Props> = (props) => {
     }, []);
 
     return (
-        <Section title="" variant={SectionVariant.CONTAINED} {...other}>
+        <Section title={header} variant={SectionVariant.CONTAINED} {...other}>
             <ul className={classes.list}>
                 {
                     results.map((item: any, index: number) => {

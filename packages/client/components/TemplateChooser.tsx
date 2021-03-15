@@ -11,6 +11,7 @@ import GenericCMSComponent from "../components/GenericCMSComponent";
 import ProductList from "../components/ProductList";
 import SimpleImageBanner from "../components/SimpleImageBanner";
 import CardList from "../components/CardList";
+import Card from "../components/Card";
 import Page from "../components/Page";
 import Navigation from "../components/Navigation";
 
@@ -31,6 +32,9 @@ const TemplateChooser: React.SFC<Props> = (props) => {
         break;
       case "https://amplience.com/composablecommerce/card-list.json":
         ComponentType = CardList;
+        break;
+    case "https://amplience.com/composablecommerce/card.json":
+        ComponentType = Card;
         break;
       case "https://amplience.com/composablecommerce/navigation.json":
         ComponentType = Navigation;
