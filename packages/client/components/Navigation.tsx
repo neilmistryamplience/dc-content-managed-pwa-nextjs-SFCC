@@ -63,8 +63,6 @@ const Navigation: React.SFC<Props> = (props) => {
             <ul className={classes.list}>
                 {
                     menu.map(link => {
-
-                        console.log(link.data)
                         if(!link.data.link) link.data.link = "#";
                         return <li className={clsx(classes.listItem, {
                             [classes.activeListItem]: router?.asPath === link.data.link
