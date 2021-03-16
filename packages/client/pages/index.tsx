@@ -43,13 +43,13 @@ interface Props {
     _meta:any;
     content: any[];
   };
-  products: any[];
+  /*products: any[];
   productslist: any[];
-  productSearch: any[];
+  productSearch: any[];*/
 }
 
 const Index: NextPage<Props> = (props: Props) => {
-  let { navigation, slothero, slotbody, slotproducts, products, productslist, productSearch } = props;
+  let { navigation, slothero, slotbody, slotproducts/*, products, productslist, productSearch*/ } = props;
 
   //console.log("Navigation! - ", navigation);
   //console.log("Products List! - ", productslist)
@@ -130,12 +130,12 @@ const Index: NextPage<Props> = (props: Props) => {
  - Navigation: dior/web/menu
 */
 Index.getInitialProps = async (context) => {
-  const navigation = fetchContent("dior/web/menu", context);
+  const navigation = fetchContent("main/navigation", context);
   const slothero = fetchContent("home/main/hero-localised", context);
   const slotbody = fetchContent("home/main/body-localised", context);
   const slotproducts = fetchContent("home/main/products-localised", context);
 
-  const products = fetchProductById("25519044M", context);
+  /*const products = fetchProductById("25519044M", context);
   const prods: Array<any> = [
     "25519044M",
     "25564754M",
@@ -150,16 +150,16 @@ Index.getInitialProps = async (context) => {
     "womens-accessories",
     "most-popular",
     context
-  );
+  );*/
 
   return {
     navigation: await navigation,
     slothero: await slothero,
     slotbody: await slotbody,
     slotproducts: await slotproducts,
-    products: await products,
+    /*products: await products,
     productslist: await productslist,
-    productSearch: await productSearch,
+    productSearch: await productSearch,*/
   };
 };
 
