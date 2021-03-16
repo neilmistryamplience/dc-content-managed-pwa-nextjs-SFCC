@@ -57,8 +57,8 @@ const AdvancedBanner: React.SFC<Props> = (props) => {
   } = props;
 
   var imageUrl = null;
-  if (bannerImage?.image?.image) {
-    imageUrl = getImageURL(bannerImage?.image?.image, {
+  if (bannerImage?.imageholder?.image?.image) {
+    imageUrl = getImageURL(bannerImage?.imageholder?.image?.image, {
       width: 3000,
       upscale: false,
     });
