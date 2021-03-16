@@ -36,22 +36,33 @@ interface Props extends WithStyles<typeof styles> {
   bannerImage?: any;
   video?: any;
   hasVideo: boolean;
-  header?:any;
-  subheader?:any;
-  description?:any;
-  button?:any;
+  header?: any;
+  subheader?: any;
+  description?: any;
+  button?: any;
 }
 
 const AdvancedBanner: React.SFC<Props> = (props) => {
-  const { classes, className, bannerImage, video, hasVideo, header, subheader, description, button, ...other } = props;
+  const {
+    classes,
+    className,
+    bannerImage,
+    video,
+    hasVideo,
+    header,
+    subheader,
+    description,
+    button,
+    ...other
+  } = props;
 
   var imageUrl = null;
-  if(bannerImage?.image?.image){
+  if (bannerImage?.image?.image) {
     imageUrl = getImageURL(bannerImage?.image?.image, {
-    width: 3000,
-    upscale: false,
-  });
-}
+      width: 3000,
+      upscale: false,
+    });
+  }
 
   const buttonDStyle = {
     left: "36%",
@@ -65,11 +76,12 @@ const AdvancedBanner: React.SFC<Props> = (props) => {
       {...other}
       style={{ position: "relative" }}
     >
-      {imageUrl ? (<img
-        className={classes.image}
-        src={imageUrl}
-        style={{ position: "relative" }}
-      />
+      {imageUrl ? (
+        <img
+          className={classes.image}
+          src={imageUrl}
+          style={{ position: "relative" }}
+        />
       ) : null}
       {hasVideo && video ? (
         <div className="video">
@@ -80,7 +92,7 @@ const AdvancedBanner: React.SFC<Props> = (props) => {
             autoPlay
             muted
             loop
-            style={{width:'100%'}}
+            style={{ width: "100%", position:'relative' }}
             src={`//${video.amplienceVideo.defaultHost}/v/${video.amplienceVideo.endpoint}/${video.amplienceVideo.name}/mp4_720p?protocol=https`}
           >
             <source
@@ -110,6 +122,27 @@ const AdvancedBanner: React.SFC<Props> = (props) => {
           <div className="pause-button inactive"></div>
         </div>
       ) : null}
+    <div style={{position:'absolute', width: '100%', height:'100%', top:0, left:0, display:'block', textAlign:'center'}}>
+        <div style={{width:'80%', bottom:'3.75rem', left:'50%', transform:'translateX(-50%)', position:'absolute'}}>
+      {header && header?.text ? (
+        <Typography variant="h4" style={{color:'white'}}>{header.text}</Typography>
+      ) : null}
+      {subheader && subheader?.text ? (
+        <Typography variant="h5" style={{color:'white'}}>{subheader.text}</Typography>
+      ) : null}
+      {description && description?.text ? (
+        <Typography variant="body2" style={{color:'white'}}>{description.text}</Typography>
+      ) : null}
+
+      {button && button?.buttonLabel ? (
+        <a href={button.buttonLink}>
+          <Button variant="contained" color="primary">
+            {button.buttonLabel}
+          </Button>
+        </a>
+      ) : null}
+      </div>
+      </div>
     </div>
   );
 };
